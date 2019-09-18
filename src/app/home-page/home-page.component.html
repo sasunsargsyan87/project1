@@ -1,0 +1,53 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+     <div class="container">
+      <div class="row">
+        <div class="log-in">
+        <div>
+      <input type="email" class="form-control" placeholder="your email" formControlName="email" [(ngModel)]="newEmail">
+        </div>  <br>
+          <div>
+      <input type="text" class="form-control" placeholder="your phoneNumber" formControlName="phoneNumber" [(ngModel)]="newPhoneNumber">
+          </div>
+          <br>
+    <div id="start">
+      <button type="submit" [disabled]="form.invalid" *ngIf="flag2" >Start</button>
+    </div>
+          <br>
+        <p class="btn btn-danger">{{timeLeft}} Seconds Left...</p> <p *ngIf="flag7" style="font-size: 20px"> Result: 6/{{ count}}</p>
+        </div>
+
+    <div id="phone">
+      <ul *ngFor="let ccc of contact">
+        <li>Email: {{ccc.email}}</li>
+        <li>Phone: {{ccc.phoneNumber}}</li>
+      </ul>
+    </div>
+
+    <div id="answer" *ngIf="flag">
+    <ul *ngFor="let item of questions; let i = index" [style.color]="'black'" class="questions">
+      <li class="question"><b> {{i+1}}. {{ item.question}}</b></li>
+<div class="versions">
+  <input [disabled]="(flag7)" type="radio" [name]="i" value="{{item.answer1}}" (change)="radioChangeHandeler($event)" >
+      <span  [ngStyle]="{color: getColor(i)}">  {{item.answer1}} </span><br>
+  <input [disabled]="(flag7)" type="radio" [name]="i" value="{{item.answer2}}" (change)="radioChangeHandeler($event)" >
+      <span [ngStyle]="{color: getColor1(i)}"> {{item.answer2}} </span><br>
+  <input [disabled]="(flag7)" type="radio" [name]="i" value="{{item.answer3}}" (change)="radioChangeHandeler($event)" >
+      <span [ngStyle]="{color: getColor2(i)}">  {{item.answer3}} </span><br>
+</div>
+    </ul>
+      <div id="verify">
+        <button type="submit" (click)="verify()" [disabled]="flag3">Verify</button>
+      </div>
+
+    </div>
+
+      </div>
+     </div>
+   <button printSectionId="answer" button (click)="print()" >Print</button>
+
+
+</form>
+
+
+
+
